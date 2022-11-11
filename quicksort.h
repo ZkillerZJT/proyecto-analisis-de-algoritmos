@@ -1,40 +1,32 @@
-#include <cstdio>
-#include <algorithm>
-
-using namespace std;
-int particion (int ar[], int bajo, int alto)
+void qSort(int *ar, int izq, int der, int *contadorQ)
 {
-    int pivot = ar[alto];    //taking the last element as pivot
-    int i = (bajo - 1);
-    for (int j = bajo; j <= alto- 1; j++)
+  if(izq<der)
     {
-        // If current element is smaller than or
-        // equal to pivot
-        if (ar[j] <= pivot)
-        {
-            i++;
-            swap(ar[i], ar[j]);
-        }
-    }
-    swap(ar[i + 1], ar[alto]);
-    return (i + 1);
-}
-
-void quickSort(int ar[], int bajo, int alto)
-{
-    if (bajo < alto)
-    {
-        int pi = particion(ar, bajo, alto);
-        quickSort(ar, bajo, pi - 1);
-        quickSort(ar, pi + 1, alto);
+      int pivoteindice=(izq+der)/2;
+      int pivote=particion(ar, izq, der, pivoteindice, contadorQ);
+      qSort(ar, izq, pivote-1, contadorQ);
+      qSort(ar, pivote+1,der, contadorQ);
     }
 }
-
-/*int main()
+int particion(int *ar, int izq, int der, int pivote, int *contadorQ)
 {
-    int ar[] = {10, 7, 8, 9, 1, 5};
-    int n = sizeof(ar)/sizeof(ar[0]);
-    quickSort(ar, 0, n-1);
 
-    return 0;
-}*/
+  int i;
+  int pivoteValue=ar[pivote];
+  int indice=izq;
+
+  swap(&ar[pivote],&ar[der]);
+  (*contadorQ)++;
+
+  for(i=izq;i<der;i++);
+  {
+    if (ar[i]<pivoteValue)
+      {
+    swap(&ar[i],&ar[indice]);
+    (*contadorQ)++;
+    indice++;
+      }
+  }
+  swap(&ar[indice],&ar[der]);
+  return indice;
+}
