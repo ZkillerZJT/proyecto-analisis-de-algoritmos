@@ -4,7 +4,7 @@ void shellsort(int *ar, int n) {
   	int i;
     for (i = intervalo; i < n; i += 1) {
       int temp = ar[i];
-      int j; 
+      int j;
       for (j = i; j >= intervalo && ar[j - intervalo] > temp; j -= intervalo) {
         ar[j] = ar[j - intervalo];
       }
