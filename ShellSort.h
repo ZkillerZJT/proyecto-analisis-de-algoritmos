@@ -1,4 +1,4 @@
-void shellsort(int *ar, int n) {
+ void shellsort(int *ar, int n) {
 	int intervalo;
   for (intervalo = n / 2; intervalo > 0; intervalo /= 2) {
   	int i;
